@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>한자능력검정 3급 연습📝</title>
+    <title>한자 3급 마스터 프로 📝</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&family=Nanum+Gothic:wght@400;700&display=swap"
         rel="stylesheet">
@@ -207,6 +207,21 @@
             box-shadow: none;
         }
 
+        .btn-correct {
+            background-color: #2196F3 !important;
+            color: white !important;
+        }
+
+        .btn-wrong {
+            background-color: #f44336 !important;
+            color: white !important;
+        }
+
+        .btn-answer {
+            background-color: #4CAF50 !important;
+            color: white !important;
+        }
+
         #score-display {
             font-size: 12px;
             color: #aaa;
@@ -336,9 +351,14 @@
                     if (opt === q.m) {
                         document.getElementById('feedback').innerHTML = "<span class='correct'>⭕ 정답!</span>";
                         correctCount++;
+                        btn.classList.add('btn-correct');
                     } else {
                         document.getElementById('feedback').innerHTML = `<span class='incorrect'>❌ 정답: ${q.m}</span>`;
                         if (!failedQuestions.some(f => f.h === q.h)) failedQuestions.push(q);
+                        btn.classList.add('btn-wrong');
+                        document.querySelectorAll('.option-btn').forEach(b => {
+                            if (b.innerText === q.m) b.classList.add('btn-answer');
+                        });
                     }
                     speak(q.m);
 
